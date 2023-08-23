@@ -1,76 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>La vie de Bob</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Formulaire Animaux</title>
 </head>
-
 <body>
+<div class="container mt-5">
+    <div class="card p-4 shadow">
+        <div class="card-body">
 
+            <h1 class="text-center mb-4">Création de Profil de Personne</h1>
+            <form action="traitement_personne.php" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+                <div class="mb-3">
+                    <label for="compteEnBanque" class="form-label">Compte en Banque</label>
+                    <input type="number" class="form-control" id="compteEnBanque" name="compteEnBanque" step="0.01" required>
+                </div>
+                <div class="mb-3">
+                    <label for="salaire" class="form-label">Salaire</label>
+                    <input type="number" class="form-control" id="salaire" name="salaire" step="0.01" required>
+                </div>
+                <div class="mb-3">
+                    <label for="nb_animaux" class="form-label">Nombre d'Animaux</label>
+                    <input type="number" class="form-control" id="nb_animaux" name="nb_animaux" required>
+                </div>
+                <div class="mb-3">
+                    <label for="photo" class="form-label">Photo de profil</label>
+                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
+                </div>
 
-<div class="bg-light text-center py-3" style="background-color: #f0f0f0;">
-    <h4>La vie de Bob</h4>
-</div>
-<div class="container mt-4">
+                <button type="submit" class="btn btn-primary">Créer Personne</button>
 
-    <h1>Bob, Mitaine et Roboto</h1>
-    <p id="date"></p> <!-- La date sera ajoutée ici par PHP -->
-    <div class="row">
-        <div class="col-md-6">
-            <form action="votre-fichier-de-traitement.php" method="post">
-                <div class="card">
-                    <img src="image-path" class="card-img-top" alt="Image pour Bob">
-                    <div class="card-body">
-                        <h2 class="card-title">Titre</h2>
-                        <p>Argent disponible : <span name="argent_disponible">Votre valeur ici</span></p>
-                        <p>Taux horaire : <span name="taux_horaire">Votre valeur ici</span></p>
-                        <p>Poste : Programmeur</p>
-                        <button type="submit" class="btn btn-primary">Travailler 8h</button>
-                    </div>
-                </div>
             </form>
+
+            <div class="mt-3 text-center">
+                <a href="profile.php" class="btn btn-outline-secondary">Afficher les profils</a>
+            </div>
+
         </div>
-        <div class="col-md-6">
-            <form action="votre-fichier-de-traitement.php" method="post">
-                <div class="card">
-                    <img src="image-path" class="card-img-top" alt="Image pour Mitaine">
-                    <div class="card-body">
-                        <h2 class="card-title">Titre</h2>
-                        <p>Dernier repas :</p>
-                        <p>À faim :</p>
-                        <button type="submit" class="btn btn-primary">Nourrir Mitaine</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-6">
-            <form action="votre-fichier-de-traitement.php" method="post">
-                <div class="card">
-                    <img src="image-path" class="card-img-top" alt="Image pour Roboto">
-                    <div class="card-body">
-                        <h2 class="card-title">Titre</h2>
-                        <p>Dernier repas :</p>
-                        <p>À faim :</p>
-                        <button type="submit" class="btn btn-primary">Nourrir Roboto</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="mt-2">
-        <a href="page_2.php" class="btn btn-secondary">Modifier les photos de profil</a>
     </div>
 </div>
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

@@ -1,26 +1,29 @@
 <?php
 
-//session_start(); // Pas besoin deja demarrer dans Bob.php
+session_start();
 
-require 'Bob.php';
+require 'Personne.php'; // Assurez-vous que le chemin est correct
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $prenom = $_POST['prenom'];
-    $CompteEnBanque = $_POST['CompteEnBanque'];
-    $nb_heures_travail = $_POST['nb_heures_travail'];
+    $nom = $_POST['nom'];
+    $compteEnBanque = $_POST['compteEnBanque'];
     $salaire = $_POST['salaire'];
-    $photo = $_POST['photo'];
+    $nb_animaux = $_POST['nb_animaux'];
+
+
 
     $targetDir = "uploads/";// Initialise le répertoire cible pour le téléchargement des photos de profil.
 
+// Vérifier si un fichier a été téléchargé
     if (!file_exists($targetDir)) {
         mkdir($targetDir, 0777, true); // Crée le répertoire s'il n'existe pas.
     }
 
     if ($_FILES["photo"]["error"] > 0) {
         $_SESSION["error"] = "Erreur lors du téléchargement : " . $_FILES["photo"]["error"]; // Stocke l'erreur dans la session si le téléchargement échoue.
-        header("Location: confirmation.php");
+        header("Location: profile.php");
         exit;
     }
 
@@ -28,15 +31,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $targetPath = $targetDir . $photoName;
 
     if (move_uploaded_file($_FILES["photo"]["tmp_name"], $targetPath)) { // Déplace le fichier téléchargé vers le répertoire cible.
-        $Bob = new Bob($prenom, $CompteEnBanque, $nb_heures_travail, $salaire, $photoName); // Crée un objet de profil avec les données récupérée
+        $Personne = new Personne($nom, $compteEnBanque, $salaire, $nb_animaux, $photoName ); // Crée un objet de profil avec les données récupérées.
 
-        $_SESSION["Bob"] = $_SESSION["Bob"] ?? []; // Si non défini, initialise un tableau vide pour stocker les profils.
-        $_SESSION["Bob"][] = $Bob; // Ajoute le nouveau profil au tableau de profils dans la session.
+        $_SESSION["profile"] = $_SESSION["profile"] ?? []; // Si non défini, initialise un tableau vide pour stocker les profils.
+        $_SESSION["profile"][] = $Personne; // Ajoute le nouveau profil au tableau de profils dans la session.
         $_SESSION["targetPath"] = $targetPath; // Stocke le chemin vers la photo dans la session, utilisé dans le fichier de confirmation.
-        $_SESSION["currentBob"] = serialize($Bob); // Sérialise l'objet de profil pour le stocker dans la session.
-    } else {
+        $_SESSION["currentUserProfile"] = serialize($Personne); // Sérialise l'objet de profil pour le stocker dans la session.
+        $_SESSION['nb_animaux'] = $nb_animaux;//a definir plus tard
+    }
+    else {
         $_SESSION["error"] = "Erreur lors du déplacement du fichier téléchargé."; // Stocke un message d'erreur dans la session si le déplacement du fichier échoue.
     }
 
-    header("Location: index.php"); // Redirige vers la page de confirmation où les données seront affichées.
+
+
 }
+// Rediriger vers la page pour ajouter les animaux
+header('Location: profile.php');
+exit
+?>
+
