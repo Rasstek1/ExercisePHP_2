@@ -14,7 +14,7 @@
             <h1 class="text-center mb-4">Création de Profil de Personne</h1>
             <form action="traitement_personne.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="nom" class="form-label">Nom</label>
+                    <label for="nom" class="form-label">Prenom</label>
                     <input type="text" class="form-control" id="nom" name="nom" required>
                 </div>
                 <div class="mb-3">
@@ -22,12 +22,12 @@
                     <input type="number" class="form-control" id="compteEnBanque" name="compteEnBanque" step="0.01" required>
                 </div>
                 <div class="mb-3">
-                    <label for="salaire" class="form-label">Salaire</label>
+                    <label for="salaire" class="form-label">Salaire/Horaire</label>
                     <input type="number" class="form-control" id="salaire" name="salaire" step="0.01" required>
                 </div>
                 <div class="mb-3">
-                    <label for="nb_animaux" class="form-label">Nombre d'Animaux</label>
-                    <input type="number" class="form-control" id="nb_animaux" name="nb_animaux" required>
+                    <label for="animaux" class="form-label">Nombre d'Animaux</label>
+                    <input type="number" class="form-control" id="animaux" name="animaux" required>
                 </div>
                 <div class="mb-3">
                     <label for="photo" class="form-label">Photo de profil</label>

@@ -11,16 +11,17 @@ class Personne
 
     private $photo; // Type non spécifié pour la photo
 
-    private $animaux = [];
+    private int $nbAnimaux;
 
-    public function __construct(string $nom, float $compteEnBanque, float $salaire, $photo, $animaux = [])
+    public function __construct(string $nom, float $compteEnBanque, float $salaire, int $animaux, $photo)
     {
 
         $this->nom = $nom;
         $this->compteEnBanque = $compteEnBanque;
         $this->salaire = $salaire;
+        $this->nbAnimaux = $animaux;
         $this->photo = $photo;
-        $this->animaux = $animaux;
+
     }
 
     public function getNom(): string
@@ -32,14 +33,15 @@ class Personne
         }
     }
 
-    public function getCompteEnBanque(): float
+    public function getCompteEnBanque(): string
     {
         if ($this->compteEnBanque == "") {
-            return ("Compte en banque non defini");
+            return "Compte en banque non defini";
         } else {
-            return $this->compteEnBanque;
+            return number_format($this->compteEnBanque, 2);
         }
     }
+
 
 
     public function travailler8h() {
@@ -53,14 +55,16 @@ class Personne
         return self::NB_HEURES_TRAVAIL; // Pas besoin de $this ici car c'est une constante de classe
     }
 
-    public function getSalaire(): float
+    public function getSalaire(): string
     {
-        if ($this->salaire == !null) {
-            return $this->salaire;
+        if ($this->salaire == "") {
+            return "Salaire non defini";
         } else {
-            return ("Salaire non defini");
+            return number_format($this->salaire, 2);
         }
     }
+
+
 
     public function setPhoto($photo) {
         $this->photo = $photo; // Utilisez '=' au lieu de '=='
@@ -73,6 +77,6 @@ class Personne
         $this->animaux[] = $animal;
     }
     public function getNombreAnimaux() {
-        return $this->animaux;
+        return $this->nbAnimaux;
     }
 }

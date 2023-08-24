@@ -12,6 +12,7 @@
     <div class="card p-3 shadow">
         <div class="profile-section">
             <?php
+            session_start();
 
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
@@ -27,53 +28,45 @@
             }
 
             // Vérification de la présence des données de session
-            if (!isset($_SESSION["targetPath"]) || !isset($_SESSION["currentUserProfile"])) {
-                die("Erreur: Les données de session sont manquantes.");
+            if (!isset($_SESSION["targetPath"])) {
+                die("Erreur: La variable targetPath de la session est manquante.");
+            }
+
+            if (!isset($_SESSION["profiles"])) {
+                die("Erreur: La variable profiles de la session est manquante.");
             }
             // Récupération des données de la session
-            $targetPath = $_SESSION["targetPath"];
-            $userProfile = unserialize($_SESSION["currentUserProfile"]); ?>// Désérialisez l'objet ici
+            ?>
 
-            <?php if (isset($_SESSION["profile"]) && !empty($_SESSION["profile"])): ?>
-            <!-- Ici, votre boucle foreach -->
-            <?php foreach ($_SESSION["profile"] as $profileKey => $Personne): ?>
+
+
+
+            <?php if (isset($_SESSION["profiles"])): ?>
+                <?php foreach ($_SESSION["profiles"] as $profileKey => $serializedPersonne):
+                    $Personne = unserialize($serializedPersonne); // Désérialisez l'objet ici
+
+                    ?>
 
                     <div class="card">
                         <div class="row no-gutters">
                             <div class="col-md-4">
+
                                 <img src="uploads/<?php echo $Personne->getPhoto(); ?>" class="card-img"
                                      alt="Photo de profil">
                                 <!-- Mettez le bon chemin vers l'image -->
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo $Personne->getNom(); ?></h5>"
-                                    <div class="mb-3">
-                                        <label for="nom"
-                                               class="form-label">Nom </label>
-                                        <input type="text" class="form-control" id="nom" name="nom" value="<?php echo $Personne->getNom(); ?>"
-                                               readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="compteEnBanque" class="form-label">Compte en
-                                            Banque</label>
-                                        <input type="number" class="form-control" id="compteEnBanque"
-                                               name="compteEnBanque" value="<?php echo $Personne->getCompteEnBanque(); ?>" step="0.01" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="salaire"
-                                               class="form-label">Salaire</label>
-                                        <input type="number" class="form-control" id="salaire" name="salaire"
-                                               value="<?php echo $Personne->getSalaire(); ?>" step="0.01" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="nb_animaux" class="form-label">Nombre
-                                            d'Animaux</label>
-                                        <input type="number" class="form-control" id="nb_animaux" name="nb_animaux"
-                                               value="<?php echo $Personne->getNombreAnimaux(); ?>" readonly>
+
+                                    <h4 class="card-title"><?php echo $Personne->getNom(); ?></h4>
+                                    <div class="card-body">
 
 
+                                        <p><strong>Compte en Banque :</strong> <?php echo $Personne->getCompteEnBanque(); ?>$Can</p>
+                                        <p><strong>Salaire :</strong> <?php echo $Personne->getSalaire(); ?>$Can</p>
+                                        <p><strong>Nombre d'Animaux :</strong> <?php echo $Personne->getNombreAnimaux(); ?></p>
                                     </div>
+
 
                                 </div>
                             </div>
